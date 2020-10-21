@@ -34,13 +34,16 @@ Create project
 ```
 cd ..
 docker run --rm --volume %cd%:/app bsm-composer-1:1 composer create-project symfony/skeleton app_name
-# Copy docker-files, docker-compose.yml in app_name.
+# Copy README.md, docker-files, docker-compose.yml, .gitignore in project 'app_name'.
 cd app_name
-
-docker run --rm --volume %cd%:/app bsm-composer-1:1 composer req api
+# Search and replase 'bsm' to 'app_name'.
+docker-compose build
+docker run --rm --volume %cd%:/app app_name-composer-1:1 composer req api
+docker run --rm --volume %cd%:/app app_name-composer-1:1 composer req migrations
 ```
 
 Commands
 ```
-docker-compose exec bsm-php bin/console doctrine:migrations:status
+docker-compose exec phpfpm bin/console doctrine:migrations:status
+docker-compose exec phpfpm bin/console doctrine:migrations:generate
 ```
