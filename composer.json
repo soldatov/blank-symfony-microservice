@@ -1,0 +1,13 @@
+{
+    "name": "soldatov/blank-symfony-microservice",
+    "description": "Blank Symfony microservice",
+    "type": "project",
+    "license": "unlicense",
+    "authors": [
+        {
+            "name": "Anatoly Soldatov",
+            "email": "soldatov.anatoly@gmail.com"
+        }
+    ],
+    "require": {}
+}

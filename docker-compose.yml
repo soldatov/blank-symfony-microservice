@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  phpfpm:
+    container_name: bsm-php
+    build:
+      context: ./docker-files/php
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    volumes:
+      - .:/app
+  nginx:
+    container_name: bsm-nginx
+    build:
+      context: ./docker-files/nginx
+    ports:
+      - 80:80
+    depends_on:
+      - phpfpm
+    links:
+      - phpfpm
+    volumes:
+      - .:/app
+      - ./logs/nginx:/var/log/nginx
+  postgres:
+    container_name: bsm-postgres
+    build:
+      context: ./docker-files/postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: asterisk
+      POSTGRES_USER: upostgres
+      POSTGRES_PASSWORD: 123QWErty
+      PGDATA: /pgdata
+    volumes:
+      - ./pgdata:/pgdata
