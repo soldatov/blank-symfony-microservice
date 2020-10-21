@@ -3,37 +3,46 @@ version: '3'
 services:
   phpfpm:
     container_name: bsm-php
+    image: bsm-php-7.4:1
     build:
       context: ./docker-files/php
     depends_on:
       - postgres
-    links:
-      - postgres
     volumes:
       - .:/app
+  composer:
+    container_name: bsm-composer
+    image: bsm-composer-1:1
+    build:
+      context: ./docker-files/composer
+    depends_on:
+      - phpfpm
+    volumes:
+      - .:/app
+    command: if [ ! -f .env ]; then composer create-project symfony/skeleton app_name && composer req api fi
   nginx:
     container_name: bsm-nginx
+    image: bsm-nginx-1.19:1
     build:
       context: ./docker-files/nginx
     ports:
       - 80:80
     depends_on:
       - phpfpm
-    links:
-      - phpfpm
     volumes:
       - .:/app
       - ./logs/nginx:/var/log/nginx
   postgres:
     container_name: bsm-postgres
+    image: bsm-postgres-13:1
     build:
       context: ./docker-files/postgres
     ports:
       - 5432:5432
+    volumes:
+      - ./pgdata:/pgdata
     environment:
       POSTGRES_DB: asterisk
       POSTGRES_USER: upostgres
       POSTGRES_PASSWORD: 123QWErty
       PGDATA: /pgdata
-    volumes:
-      - ./pgdata:/pgdata
