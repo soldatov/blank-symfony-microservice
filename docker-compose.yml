@@ -19,7 +19,7 @@ services:
       - phpfpm
     volumes:
       - .:/app
-    command: if [ ! -f .env ]; then composer create-project symfony/skeleton app_name && composer req api fi
+#    command: composer create-project symfony/skeleton app_name && composer req api
   nginx:
     container_name: bsm-nginx
     image: bsm-nginx-1.19:1

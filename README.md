@@ -37,10 +37,10 @@ docker run --rm --volume %cd%:/app bsm-composer-1:1 composer create-project symf
 # Copy docker-files, docker-compose.yml in app_name.
 cd app_name
 
-docker run --rm --volume %cd%:/app soldatov/composer:1-bsm composer req api
+docker run --rm --volume %cd%:/app bsm-composer-1:1 composer req api
 ```
 
 Commands
 ```
-docker-compose exec phpfpm bin/console doctrine:migrations:status
+docker-compose exec bsm-php bin/console doctrine:migrations:status
 ```
