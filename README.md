@@ -40,6 +40,7 @@ cd app_name
 docker-compose build
 docker run --rm --volume %cd%:/app app_name-composer-1:1 composer req api
 docker run --rm --volume %cd%:/app app_name-composer-1:1 composer req migrations
+docker run --rm --volume %cd%:/app app_name-composer-1:1 composer require symfony/maker-bundle --dev
 ```
 
 Commands
