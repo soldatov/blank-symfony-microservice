@@ -2,3 +2,6 @@
 vendor/*
 pgdata/*
 logs/*
+.env.local
+public/bundles/*
+var/*

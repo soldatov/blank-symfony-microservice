@@ -1,29 +1,38 @@
 version: '3'
 
 services:
+
   phpfpm:
     container_name: bsm-php
-    image: bsm-php-7.4:1
+    image: bsm-php
     build:
-      context: ./docker-files/php
+      context: ./docker-files/dev/php
+    env_file:
+      - .env.local
     depends_on:
       - postgres
     volumes:
       - .:/app
+
   composer:
     container_name: bsm-composer
-    image: bsm-composer-1:1
+    image: bsm-composer
     build:
-      context: ./docker-files/composer
+      context: ./docker-files/dev/composer
+    env_file:
+      - .env.local
     depends_on:
       - phpfpm
     volumes:
       - .:/app
+
   nginx:
     container_name: bsm-nginx
-    image: bsm-nginx-1.19:1
+    image: bsm-nginx
     build:
-      context: ./docker-files/nginx
+      context: docker-files/dev/nginx
+    env_file:
+      - .env.local
     ports:
       - 80:80
     depends_on:
@@ -31,11 +40,15 @@ services:
     volumes:
       - .:/app
       - ./logs/nginx:/var/log/nginx
+      - ./docker-files/dev/nginx/default.conf:/etc/nginx/conf.d/default.conf
+
   postgres:
     container_name: bsm-postgres
-    image: bsm-postgres-13:1
+    image: bsm-postgres
     build:
-      context: ./docker-files/postgres
+      context: docker-files/dev/postgres
+    env_file:
+      - .env.local
     ports:
       - 5432:5432
     volumes:
