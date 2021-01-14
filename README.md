@@ -66,7 +66,7 @@ Add packages in image: `docker-files/dev/php/Dockerfile`. Command `RUN install-p
 > docker run --rm -v %cd%:/app composer req nelmio/api-doc-bundle twig asset
 ```
 
-Useful commands
+## Useful commands
 ```
 docker-compose build --no-cache
 docker-compose run --rm bsm-php php -v
@@ -82,7 +82,7 @@ docker-compose run --rm bsm-php php -m
 > docker run --rm --volume /$(pwd):/app bsm-composer composer install
 ```
 
-Symfony console commands
+## Symfony console commands
 ```
 > docker-compose exec phpfpm bin/console doctrine:migrations:status
 > docker-compose exec phpfpm bin/console doctrine:migrations:migrate
