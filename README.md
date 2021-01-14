@@ -1,4 +1,9 @@
 # Blank Symfony microservice
+* Nginx 1.19
+* PHP 7.4
+* Composer 2
+* Symfony 5.2
+* Postgres 13.1
 
 ## Preparation
 

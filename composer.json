@@ -9,5 +9,10 @@
             "email": "soldatov.anatoly@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=7.4",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "ext-json": "*"
+    }
 }
